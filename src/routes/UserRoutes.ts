@@ -1,4 +1,5 @@
 import express from 'express';
+import { AuthMiddleware } from '../middlewares/AuthMiddleware';
 
 class UserRoutes {
     router = express.Router();
@@ -8,8 +9,10 @@ class UserRoutes {
     }
 
     private initializeRoutes() {
+        this.router.use(AuthMiddleware)
         this.router.get('/', (req, res) => {
-            res.send('User route');
+            console.log(req.user);
+            res.send("Hello from user route");
         });
     }
 }

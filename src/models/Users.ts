@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 export interface UserDoc extends mongoose.Document {
-    usernae: string;
+    username: string;
     email: string;
     password: string;
     fullName: string;
@@ -11,9 +11,9 @@ export interface UserDoc extends mongoose.Document {
 }
 
 export enum Gender {
-    Male,
-    Female,
-    Other
+    Male = "Male",
+    Female = "Female",
+    Other = "Other"
 }
 
 const userSchema = new mongoose.Schema({
@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema({
     email: { type: String, required: true },
     password: { type: String, required: true },
     fullName: { type: String, required: true },
-    gender: { type: Gender, required: true },
+    gender: { type: String, required: true },
     dateOfBirth: { type: Date, required: true },
     country: { type: String, required: true }
 })

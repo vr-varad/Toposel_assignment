@@ -1,4 +1,5 @@
 import express from 'express';
+import { UserLogin, UserRegistration } from '../controllers/AuthController';
 
 class AuthRoutes {
     router = express.Router();
@@ -8,13 +9,8 @@ class AuthRoutes {
     }
 
     private initializeRoutes() {
-        this.router.post('/login', (req, res) => {
-            res.send('Login route');
-        });
-
-        this.router.post('/register', (req, res) => {
-            res.send('Register route');
-        });
+        this.router.post('/login', UserLogin);
+        this.router.post('/register', UserRegistration);
     }
 
 }
