@@ -1,0 +1,8 @@
+export const ErrorCode = {
+    USER_NOT_FOUND: 404,
+    INTERNAL_SERVER_ERROR: 500,
+    USER_CREATED: 201,
+    UNAUTHORIZED: 401,
+    BAD_REQUEST: 400,
+    SUCCESS: 200
+}

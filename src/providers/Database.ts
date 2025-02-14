@@ -1,10 +1,11 @@
 import mongoose from "mongoose";
+import { config } from "../config/config";
 
 
-class Database{
-    static MONGODB_URL: string = process.env.MONGODB_URI || 'mongodb://localhost:27017/';
+class Database {
+    static MONGODB_URL: string = config.MONGO_URL;
 
-    static async init(){
+    static async init() {
         try {
             await mongoose.connect(this.MONGODB_URL, {
                 dbName: "toposel"
