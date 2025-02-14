@@ -1,35 +1,30 @@
 import { NextFunction, Request, Response } from "express";
 import UserModel from "../models/Users";
+import { ErrorCode } from '../utils/ErrorHandling'
 
 export const GetUserByEmailOrUsername = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
         const { email, username } = req.body
 
         if (!email && !username) {
-            return res.status(400).json({ message: 'Email or username is required' })
-        }
-
-        if (email && username) {
-            return res.status(400).json({ message: 'Email and username cannot be used together' })
+            return res.status(ErrorCode.BAD_REQUEST).json({ message: 'Email or username is required' })
         }
 
         let user = null
 
         if (email) {
             user = await UserModel.findOne({ email })
-        }
-
-        if (username) {
+        } else if (username) {
             user = await UserModel.findOne({ username })
         }
 
         if (!user) {
-            return res.status(404).json({ message: 'User not found' })
+            return res.status(ErrorCode.USER_NOT_FOUND).json({ message: 'User not found' })
         }
 
-        return res.status(200).json({ user })
+        return res.status(ErrorCode.SUCCESS).json({ user })
     } catch (error) {
         console.log(error)
-        return res.status(500).json({ message: 'Internal server error' })
+        return res.status(ErrorCode.INTERNAL_SERVER_ERROR).json({ message: 'Internal server error' })
     }
 }

@@ -42,7 +42,7 @@ export const UserRegistration = async (req: Request, res: Response): Promise<any
         return res.status(ErrorCode.USER_CREATED).json({ message: "User created successfully", token: jwtToken });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: "Internal server error" });
+        res.status(ErrorCode.INTERNAL_SERVER_ERROR).json({ error: "Internal server error" });
     }
 }
 
@@ -74,6 +74,6 @@ export const UserLogin = async (req: Request, res: Response): Promise<any> => {
         return res.status(ErrorCode.SUCCESS).json({ message: "Login successful", token: jwtToken, user });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: "Internal server error" });
+        res.status(ErrorCode.INTERNAL_SERVER_ERROR).json({ error: "Internal server error" });
     }
 }
